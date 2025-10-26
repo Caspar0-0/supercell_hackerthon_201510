@@ -7,6 +7,8 @@ flask-cors==4.0.0
 librosa==0.10.1
 soundfile==0.12.1
 audioread==3.0.1
+numba==0.57.1
+llvmlite==0.40.1
 
 # Numerical computing (versions with binary wheels for Python 3.11)
 numpy==1.24.3
