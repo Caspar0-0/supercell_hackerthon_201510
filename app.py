@@ -2,11 +2,13 @@
 """
 Flask Web Application for Voice Character Matcher
 """
-import sys
-import os
 
-# Disable numba JIT to avoid compilation issues on limited resources
+# CRITICAL: Set numba env vars BEFORE any imports
+import os
 os.environ['NUMBA_DISABLE_JIT'] = '1'
+os.environ['NUMBA_CACHE_DIR'] = '/tmp'
+
+import sys
 
 # Add core to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'core'))
