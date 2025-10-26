@@ -7,6 +7,19 @@ echo "║     🎮 Voice Character Matcher Web Server 🎤              ║"
 echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
 
+# Check if ffmpeg is installed
+if ! command -v ffmpeg &> /dev/null; then
+    echo "⚠️  WARNING: ffmpeg is not installed!"
+    echo "📦 Install it with: brew install ffmpeg"
+    echo ""
+    read -p "Continue anyway? (y/n) " -n 1 -r
+    echo ""
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        exit 1
+    fi
+    echo ""
+fi
+
 # Check if venv exists
 if [ ! -d "venv" ]; then
     echo "📦 Creating virtual environment..."
