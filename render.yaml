@@ -3,13 +3,9 @@ services:
     name: voice-character-matcher
     env: python
     runtime: python-3.11.0
-    buildCommand: "pip install --upgrade pip setuptools wheel && pip install --only-binary=:all: numpy scipy numba && pip install -r requirements.txt"
-    startCommand: "export NUMBA_DISABLE_JIT=1 && gunicorn app:app --timeout 300 --workers 1 --threads 1 --worker-class sync --max-requests 10 --max-requests-jitter 5 --log-level info"
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --timeout 120 --workers 1"
     envVars:
       - key: FLASK_DEBUG
         value: false
-      - key: NUMBA_DISABLE_JIT
-        value: "1"
-      - key: NUMBA_CACHE_DIR
-        value: /tmp
 
