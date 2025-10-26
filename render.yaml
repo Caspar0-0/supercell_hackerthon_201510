@@ -4,7 +4,7 @@ services:
     env: python
     runtime: python-3.11.0
     buildCommand: "pip install --upgrade pip setuptools wheel && pip install --only-binary=:all: numpy scipy numba && pip install -r requirements.txt && python warmup.py"
-    startCommand: "gunicorn app:app --timeout 300 --workers 1 --threads 2 --log-level info --preload"
+    startCommand: "gunicorn app:app --timeout 300 --workers 1 --threads 1 --worker-class sync --max-requests 10 --max-requests-jitter 5 --log-level info"
     envVars:
       - key: FLASK_DEBUG
         value: false
