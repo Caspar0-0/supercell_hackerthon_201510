@@ -1,0 +1,21 @@
+# Voice Character Matcher Web - Requirements
+# Flask web framework
+Flask==3.0.0
+flask-cors==4.0.0
+
+# Audio processing
+librosa==0.10.1
+soundfile==0.12.1
+audioread==3.0.1
+
+# Numerical computing
+numpy==1.24.3
+scipy==1.11.4
+
+# Additional dependencies
+Werkzeug==3.0.1
+
+# Audio format support (needed for WebM/OGG)
+# Note: ffmpeg or avconv must be installed on the system
+# Install via: brew install ffmpeg (Mac) or apt-get install ffmpeg (Linux)
+

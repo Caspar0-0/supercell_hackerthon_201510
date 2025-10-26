@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Supercell Voice Character Matcher 🎤</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Supercell Voice Character Matcher 🎤</h1>
+            <p class="subtitle">Record your voice and discover which Supercell character you sound like!</p>
+            <p class="character-count">45 Characters • 100% Real Images</p>
+        </header>
+
+        <main>
+            <!-- Recording Section -->
+            <section class="recording-section">
+                <h2>🎙️ Record Your Voice</h2>
+                
+                <div class="example-lines">
+                    <h3>💡 Try these character lines:</h3>
+                    <div class="example-grid">
+                        <div class="example-item">
+                            <span class="quote">"Time to brawl!"</span>
+                            <span class="character">Shelly</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="quote">"Too pretty for pain!"</span>
+                            <span class="character">Colt</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="quote">"El Primo is here!"</span>
+                            <span class="character">El Primo</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="quote">"I have NO idea what's going on!"</span>
+                            <span class="character">Poco</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="quote">"Let's rock!"</span>
+                            <span class="character">Mortis</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="quote">"For the clan!"</span>
+                            <span class="character">Barbarian</span>
+                        </div>
+                    </div>
+                    <p class="tip">💬 Or just speak naturally about yourself!</p>
+                </div>
+
+                <div class="recording-controls">
+                    <button id="recordBtn" class="btn btn-record">
+                        🎙️ Start Recording (5s)
+                    </button>
+                    <button id="stopBtn" class="btn btn-stop" disabled>
+                        ⏹️ Stop
+                    </button>
+                </div>
+                
+                <div id="recordingStatus" class="status"></div>
+
+                <div id="audioPlayer" class="audio-player" style="display: none;">
+                    <audio id="audioPlayback" controls></audio>
+                    <button id="analyzeBtn" class="btn btn-analyze">
+                        🔬 Analyze My Voice!
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading -->
+            <div id="loadingSection" class="loading-section" style="display: none;">
+                <div class="spinner"></div>
+                <p>🔬 Analyzing your voice...</p>
+                <p class="loading-detail">Extracting pitch, energy, and tempo features...</p>
+            </div>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>🎯 Your Results</h2>
+                
+                <!-- Voice Analysis -->
+                <div id="voiceAnalysis" class="voice-analysis"></div>
+                
+                <!-- Best Match -->
+                <div id="bestMatch" class="best-match"></div>
+                
+                <!-- All Matches -->
+                <div id="allMatches" class="all-matches"></div>
+                
+                <button id="tryAgainBtn" class="btn btn-primary">
+                    🔄 Try Again
+                </button>
+            </section>
+        </main>
+
+        <footer>
+            <p>Powered by <strong>librosa</strong> • 45 Supercell Characters • Built with Flask & JavaScript</p>
+            <p class="credits">Brawl Stars • Clash Royale • Clash of Clans</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+</body>
+</html>
+
