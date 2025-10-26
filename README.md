@@ -260,6 +260,45 @@ Returns all 45 characters
 
 ---
 
+## 🌐 Deployment to Render
+
+This app is production-ready and can be deployed to Render with zero configuration!
+
+### Quick Deploy Steps
+
+1. **Push your code to GitHub**
+   ```bash
+   git add .
+   git commit -m "feat: Add voice character matcher"
+   git push origin voice-matching-web-interface-v1
+   ```
+
+2. **Deploy on Render**
+   - Go to https://render.com and sign up/login with GitHub
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+   - Select branch: `voice-matching-web-interface-v1`
+   - Render automatically detects `render.yaml` and configures:
+     - ✅ Python environment
+     - ✅ ffmpeg installation
+     - ✅ Gunicorn production server
+     - ✅ Environment variables
+   - Click "Create Web Service"
+
+3. **Done!** Your app will be live at `https://your-app-name.onrender.com` 🎉
+
+### What's Included for Deployment
+
+- **`Procfile`** - Tells Render to use Gunicorn production server
+- **`render.yaml`** - Full configuration including ffmpeg dependency
+- **`requirements.txt`** - All Python dependencies including gunicorn
+- **Dynamic PORT binding** - App automatically uses Render's assigned port
+
+### Free Tier Note
+
+Render's free tier may "spin down" after inactivity, causing the first request to be slower (~30-60s). Upgrade to paid tier for always-on hosting.
+
+---
 
 ## 📚 Related Documentation
 

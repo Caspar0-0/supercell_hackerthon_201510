@@ -19,3 +19,5 @@ Werkzeug==3.0.1
 # Note: ffmpeg or avconv must be installed on the system
 # Install via: brew install ffmpeg (Mac) or apt-get install ffmpeg (Linux)
 
+# Production server
+gunicorn==21.2.0

@@ -167,13 +167,15 @@ def get_character_image(character_name):
 if __name__ == '__main__':
     print("\n🎮 Voice Character Matcher Web Server 🎤")
     print("=" * 60)
-    print("✅ Server starting on http://localhost:5000")
-    print("✅ Open your browser and visit: http://localhost:5000")
-    print("=" * 60 + "\n")
     
-    # Get debug mode from environment variable (default: False for production)
+    # Get configuration from environment variables
     import os
     debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    port = int(os.getenv('PORT', 5000))
     
-    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
+    print(f"✅ Server starting on http://localhost:{port}")
+    print(f"✅ Open your browser and visit: http://localhost:{port}")
+    print("=" * 60 + "\n")
+    
+    app.run(debug=debug_mode, host='0.0.0.0', port=port)
 
