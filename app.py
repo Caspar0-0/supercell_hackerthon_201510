@@ -17,8 +17,8 @@ from core import VoiceAnalyzer, CharacterMatcher
 
 app = Flask(__name__)
 
-# Initialize components with memory-optimized sample rate
-analyzer = VoiceAnalyzer(sample_rate=16000)
+# Initialize components
+analyzer = VoiceAnalyzer()
 matcher = CharacterMatcher()
 
 
@@ -68,9 +68,8 @@ def analyze_voice():
                 print(f"⚠️ ffmpeg check failed: {e}")
             
             print("🔊 Loading audio with librosa...")
-            # Load audio using librosa with memory optimization
-            # Use lower sample rate and limit duration to reduce memory
-            audio_data, sr = librosa.load(temp_path, sr=16000, mono=True, duration=5, res_type='kaiser_fast')
+            # Load audio using librosa (it will handle webm via ffmpeg)
+            audio_data, sr = librosa.load(temp_path, sr=22050, mono=True)
             print(f"✅ Audio loaded: {len(audio_data)} samples at {sr}Hz")
         finally:
             # Clean up temp file

@@ -34,14 +34,12 @@ class VoiceAnalyzer:
         
         features = {}
         
-        # 1. Pitch (fundamental frequency) - optimized for memory
+        # 1. Pitch (fundamental frequency)
         pitches, magnitudes = librosa.piptrack(
             y=audio_data,
             sr=self.sample_rate,
             fmin=50,
-            fmax=500,
-            n_fft=1024,
-            hop_length=512
+            fmax=500
         )
         # Get the pitch with highest magnitude at each frame
         pitch_values = []
@@ -63,16 +61,14 @@ class VoiceAnalyzer:
         features['mean_energy'] = np.mean(rms)
         features['energy_variance'] = np.var(rms)
         
-        # 3. Tempo (speaking rate) - optimized
-        tempo, _ = librosa.beat.beat_track(y=audio_data, sr=self.sample_rate, hop_length=512)
+        # 3. Tempo (speaking rate)
+        tempo, _ = librosa.beat.beat_track(y=audio_data, sr=self.sample_rate)
         features['tempo'] = tempo
         
-        # 4. Spectral characteristics - optimized
+        # 4. Spectral characteristics
         spectral_centroids = librosa.feature.spectral_centroid(
             y=audio_data,
-            sr=self.sample_rate,
-            n_fft=1024,
-            hop_length=512
+            sr=self.sample_rate
         )[0]
         features['spectral_centroid'] = np.mean(spectral_centroids)
         
@@ -80,8 +76,8 @@ class VoiceAnalyzer:
         zcr = librosa.feature.zero_crossing_rate(audio_data)[0]
         features['zero_crossing_rate'] = np.mean(zcr)
         
-        # 6. MFCC (Mel-frequency cepstral coefficients) - voice timbre, optimized
-        mfccs = librosa.feature.mfcc(y=audio_data, sr=self.sample_rate, n_mfcc=13, n_fft=1024, hop_length=512)
+        # 6. MFCC (Mel-frequency cepstral coefficients) - voice timbre
+        mfccs = librosa.feature.mfcc(y=audio_data, sr=self.sample_rate, n_mfcc=13)
         for i in range(5):  # Use first 5 MFCCs
             features[f'mfcc_{i}'] = np.mean(mfccs[i])
         
