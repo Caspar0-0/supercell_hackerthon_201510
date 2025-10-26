@@ -5,6 +5,9 @@ Flask Web Application for Voice Character Matcher
 import sys
 import os
 
+# Disable numba JIT to avoid compilation issues on limited resources
+os.environ['NUMBA_DISABLE_JIT'] = '1'
+
 # Add core to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'core'))
 
