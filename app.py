@@ -35,6 +35,8 @@ def analyze_voice():
     Expects audio data as base64-encoded audio file.
     """
     try:
+        print("🎤 Starting voice analysis...")
+        
         # Get audio data from request
         data = request.get_json()
         audio_base64 = data.get('audio')
@@ -42,30 +44,51 @@ def analyze_voice():
         if not audio_base64:
             return jsonify({'error': 'No audio data provided'}), 400
         
+        print("📦 Decoding audio data...")
         # Decode base64 audio
         audio_bytes = base64.b64decode(audio_base64.split(',')[1])
+        print(f"📊 Audio size: {len(audio_bytes)} bytes")
         
         # Save to temporary file (librosa handles various formats better from file)
         import tempfile
+        import os
         with tempfile.NamedTemporaryFile(suffix='.webm', delete=False) as temp_audio:
             temp_audio.write(audio_bytes)
             temp_path = temp_audio.name
         
+        print(f"💾 Saved to temp file: {temp_path}")
+        
         try:
+            # Check if ffmpeg is available
+            import subprocess
+            try:
+                subprocess.run(['ffmpeg', '-version'], capture_output=True, timeout=5)
+                print("✅ ffmpeg is available")
+            except Exception as e:
+                print(f"⚠️ ffmpeg check failed: {e}")
+            
+            print("🔊 Loading audio with librosa...")
             # Load audio using librosa (it will handle webm via ffmpeg)
-            audio_data, sr = librosa.load(temp_path, sr=44100, mono=True)
+            audio_data, sr = librosa.load(temp_path, sr=22050, mono=True, duration=10)
+            print(f"✅ Audio loaded: {len(audio_data)} samples at {sr}Hz")
         finally:
             # Clean up temp file
-            import os
             if os.path.exists(temp_path):
                 os.unlink(temp_path)
+                print("🗑️ Temp file cleaned up")
         
         # Analyze voice
+        print("🔬 Extracting features...")
         features = analyzer.extract_features(audio_data)
+        print(f"📈 Features extracted: {features}")
+        
+        print("🎯 Categorizing voice...")
         characteristics = analyzer.categorize_voice(features)
         
         # Match to characters
+        print("🎮 Finding character matches...")
         matches = matcher.get_top_matches(features, characteristics, top_n=5)
+        print(f"✅ Found {len(matches)} matches")
         
         # Prepare response
         response = {

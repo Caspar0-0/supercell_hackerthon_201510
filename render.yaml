@@ -3,9 +3,11 @@ services:
     name: voice-character-matcher
     env: python
     runtime: python-3.11.0
-    buildCommand: "pip install --upgrade pip setuptools wheel && pip install --only-binary=:all: numpy scipy numba && pip install -r requirements.txt"
-    startCommand: "gunicorn app:app --timeout 120"
+    buildCommand: "pip install --upgrade pip setuptools wheel && pip install --only-binary=:all: numpy scipy numba && pip install -r requirements.txt && python warmup.py"
+    startCommand: "gunicorn app:app --timeout 300 --workers 1 --threads 2 --log-level info --preload"
     envVars:
       - key: FLASK_DEBUG
         value: false
+      - key: NUMBA_CACHE_DIR
+        value: /tmp
 
