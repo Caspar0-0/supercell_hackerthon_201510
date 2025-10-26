@@ -2,11 +2,10 @@ services:
   - type: web
     name: voice-character-matcher
     env: python
-    buildCommand: "apt-get update && apt-get install -y ffmpeg && pip install -r requirements.txt"
+    runtime: python-3.11.0
+    buildCommand: "pip install --upgrade pip setuptools wheel && apt-get update && apt-get install -y ffmpeg && pip install -r requirements.txt"
     startCommand: "gunicorn app:app"
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: FLASK_DEBUG
         value: false
 
