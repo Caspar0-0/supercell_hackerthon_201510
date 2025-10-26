@@ -260,44 +260,9 @@ Returns all 45 characters
 
 ---
 
-## 🚀 Running the Server
-
-### Using the Start Script (Recommended)
-```bash
-chmod +x start_server.sh
-./start_server.sh
-```
-
-### Manual Start
-```bash
-python app.py
-# Runs on http://localhost:5000
-```
-
-The app runs in production mode by default. To enable debug mode:
-```bash
-export FLASK_DEBUG=true
-python app.py
-```
-
----
-
-## 🆚 Web vs CLI Version
-
-| Feature | Web Version | CLI Version |
-|---------|------------|-------------|
-| **Interface** | Browser GUI | Terminal |
-| **Recording** | Browser API | Sounddevice |
-| **Results Display** | HTML Cards | Text Output |
-| **Images** | Real images | Emojis |
-| **Platform** | Any with browser | Local machine |
-| **Accessibility** | Very high | Technical users |
-
----
 
 ## 📚 Related Documentation
 
-- **CLI Version**: `../voice_character_matcher/README.md`
 - **Character Database**: `core/character_database.py`
 - **API Documentation**: See "API Endpoints" section above
 
