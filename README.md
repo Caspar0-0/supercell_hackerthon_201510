@@ -20,10 +20,17 @@ Record your voice in the browser and discover which Brawl Stars, Clash Royale, o
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
+### 0. Install System Dependencies
+
+Make sure ffmpeg is installed (required for audio processing):
 
 ```bash
-cd voice_matcher_web
+brew install ffmpeg
+```
+
+### 1. Install Python Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
@@ -44,9 +51,10 @@ Visit **http://localhost:5000** in your web browser
 ## 📁 Project Structure
 
 ```
-voice_matcher_web/
+supercell_hackerthon_201510/
 ├── app.py                      # Flask application
 ├── requirements.txt            # Python dependencies
+├── start_server.sh             # Server startup script
 ├── core/                       # Core voice analysis modules
 │   ├── __init__.py
 │   ├── voice_analyzer.py       # Audio feature extraction
@@ -57,8 +65,9 @@ voice_matcher_web/
 ├── static/
 │   ├── css/
 │   │   └── style.css          # Styling
-│   └── js/
-│       └── recorder.js         # Audio recording & UI logic
+│   ├── js/
+│   │   └── recorder.js         # Audio recording & UI logic
+│   └── character_images/       # Character image assets
 └── README.md                   # This file
 ```
 
@@ -251,27 +260,25 @@ Returns all 45 characters
 
 ---
 
-## 🚀 Deployment
+## 🚀 Running the Server
 
-### Development
+### Using the Start Script (Recommended)
+```bash
+chmod +x start_server.sh
+./start_server.sh
+```
+
+### Manual Start
 ```bash
 python app.py
 # Runs on http://localhost:5000
 ```
 
-### Production
-
-For production deployment, use a WSGI server:
-
+The app runs in production mode by default. To enable debug mode:
 ```bash
-# Install gunicorn
-pip install gunicorn
-
-# Run with gunicorn
-gunicorn -w 4 -b 0.0.0.0:5000 app:app
+export FLASK_DEBUG=true
+python app.py
 ```
-
-Or use nginx + gunicorn for better performance.
 
 ---
 
@@ -308,7 +315,7 @@ Or use nginx + gunicorn for better performance.
 
 ## 📝 License
 
-Part of the Caspar Astro Airflow Data Engineering project.
+Part of the Supercell Hackathon 2015-10 project.
 
 ---
 
