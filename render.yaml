@@ -3,7 +3,7 @@ services:
     name: voice-character-matcher
     env: python
     runtime: python-3.11.0
-    buildCommand: "pip install --upgrade pip setuptools wheel && apt-get update && apt-get install -y ffmpeg && pip install -r requirements.txt"
+    buildCommand: "apt-get update && apt-get install -y ffmpeg gfortran libopenblas-dev liblapack-dev pkg-config && pip install --upgrade pip setuptools wheel && pip install -r requirements.txt"
     startCommand: "gunicorn app:app"
     envVars:
       - key: FLASK_DEBUG
